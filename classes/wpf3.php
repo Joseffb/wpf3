@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: joseff
- * Date: 9/21/18
- * Time: 3:14 PM
+ * Created by Joseff Betancourt
  */
 
 class WPF3 extends prefab
