@@ -117,17 +117,15 @@ class WPF3 extends prefab
     }
 
     /**
-     * Rolls back activation procedures when de-activating the plugin
-     *
-     * @mvc Controller
+     * This will run the wordpress specific actions and filters.
      */
     public function run_actions()
     {
+        //intercept the wordpress routing and run our own route check.
         add_action('pre_get_posts', array($this, 'check_routes'));
 
     }
     function willMatchARoute() {
-        //var_dump($this->f3->ROUTES);
         if (!$this->f3->ROUTES)
             // No routes defined
             return false;
