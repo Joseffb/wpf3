@@ -67,8 +67,3 @@ if ( wpf3_requirements_met() ) {
 } else {
     add_action( 'admin_notices', 'wpf3_requirements_error' );
 }
-
-if ( is_404() ) {
-    echo "whoa";
-    exit;
-}
