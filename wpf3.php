@@ -19,6 +19,10 @@ define( 'WPF3_REQUIRED_PHP_VERSION', '7.0' );                          //
 define( 'WPF3_REQUIRED_WP_VERSION',  '4.8' );                          //
 define( 'WPF3_REQUIRED_F3_VERSION',  '3.6.4' );                          //
 $f3 = require_once (dirname( __FILE__ ) . '/includes/f3/lib/base.php');
+$f3->set('DEBUG',4);
+function test () {
+    echo "route works";
+}
 
 function wpf3_requirements_met() {
     global $wp_version;
@@ -46,6 +50,7 @@ function wpf3_requirements_error() {
     require_once( dirname( __FILE__ ) . '/views/requirements-error.php' );
 }
 
+
 /*
  * Check requirements and load main class
  * The main program needs to be in a separate file that only gets loaded if the plugin requirements are met. Otherwise older PHP installations could crash when trying to parse it.
@@ -61,4 +66,9 @@ if ( wpf3_requirements_met() ) {
     }
 } else {
     add_action( 'admin_notices', 'wpf3_requirements_error' );
+}
+
+if ( is_404() ) {
+    echo "whoa";
+    exit;
 }
