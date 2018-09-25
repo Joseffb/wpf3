@@ -3,7 +3,7 @@
 /*
 Plugin Name: Fat Free Framework for WordPress
 Plugin URI: http://github.com/joseffb/wpf3
-Description: The FatFreeFramework development library for wordpress development dependency. Other plugins may require this plugin.
+Description: The FatFreeFramework development library dependency for wordpress development. Other plugins may require this plugin.
 Version: 0.1
 Author: Joseff Betancourt
 Author URI: http://joseffb.com
