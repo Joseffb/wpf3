@@ -1,13 +1,13 @@
 <?php
 
 /*
-Plugin Name: Fat Free Framework for WordPress
-Plugin URI: http://github.com/joseffb/wpf3
-Description: The FatFreeFramework development library dependency for wordpress development. Other plugins may require this plugin.
-Version: 0.1
-Author: Joseff Betancourt
-Author URI: http://joseffb.com
-License: GPL2
+    Plugin Name: Fat Free Framework for WordPress
+    Plugin URI: http://github.com/joseffb/wpf3
+    Description: The FatFreeFramework development library dependency for wordpress development. Other plugins may require this plugin.
+    Version: 0.1
+    Author: Joseff Betancourt
+    Author URI: http://joseffb.com
+    License: GPL2
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -47,10 +47,9 @@ function wpf3_requirements_met() {
 function wpf3_requirements_error() {
     global $wp_version;
     global $f3;
-    $f3_version = explode("-",$f3->VERSION)[0];
+    $f3_version = explode("-",$f3->VERSION)[0]; //used in the error file.
     require_once( dirname( __FILE__ ) . '/views/requirements-error.php' );
 }
-
 
 /*
  * Check requirements and load main class
