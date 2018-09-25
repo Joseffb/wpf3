@@ -20,6 +20,7 @@ define( 'WPF3_REQUIRED_WP_VERSION',  '4.8' );                          //
 define( 'WPF3_REQUIRED_F3_VERSION',  '3.6.4' );                          //
 $f3 = require_once (dirname( __FILE__ ) . '/includes/f3/lib/base.php');
 $f3->set('DEBUG',4);
+
 function test () {
     echo "route works";
 }

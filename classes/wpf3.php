@@ -21,18 +21,9 @@ class WPF3 extends prefab
     private function load_config()
     {
         if (defined('WPF3_CONFIGS')) {
-            if (!empty(WPF3_CONFIGS['config_File'])) {
-                echo "inside 1";
-                //force the use of a config file. File should be in the wpf3 plugin directory.
-                if (file_exists(WPF3_CONFIGS['config_File'])) {
-
-                    echo "inside 2";
-                    $this->f3->config(WPF3_CONFIGS['config_File']);
-                } else if (file_exists(plugin_dir_path(__DIR__) . WPF3_CONFIGS['config_File'])) {
-
-                    echo "inside 3";
-                    $this->f3->config(plugin_dir_path(__DIR__) . WPF3_CONFIGS['config_File']);
-                }
+            //give a chance to pass in a config via global config var, else use the config pathin this plugin.
+            if (file_exists(WPF3_CONFIGS['config_File'])) {
+                $this->f3->config(WPF3_CONFIGS['config_File']);
             } else {
                 foreach (WPF3_CONFIGS as $key => $value) {
                     echo "inside 4 loop";
@@ -40,16 +31,16 @@ class WPF3 extends prefab
                 }
             }
         } else {
-            //settings in wordpress config file should override other configs unless otherwise directed.
             $file = plugin_dir_path(__DIR__) . "config/configs.ini";
             if (file_exists($file)) {
                 $this->f3->config($file);
             }
         }
 
-        //Set a standard autoload path to be the classes folder.
-        $autoload = plugin_dir_path(__DIR__) . "classes/";
-        $this->f3->set('AUTOLOAD', !empty($this->f3->AUTOLOAD) ? $this->f3->AUTOLOAD . ";" . $autoload : $autoload);
+        //Set a standard autoload path to be the WPF3 classes folder.
+        $wpf3_classes = plugin_dir_path(__DIR__) . "classes/";
+        $autoload = empty($this->f3->AUTOLOAD) ? $wpf3_classes : $this->f3->AUTOLOAD . ";" . $wpf3_classes;
+        $this->f3->set('AUTOLOAD', $autoload);
     }
 
     /** Copies the WordPress Globals array into a f3 Hive setting. */
@@ -125,25 +116,27 @@ class WPF3 extends prefab
         add_action('pre_get_posts', array($this, 'check_routes'));
 
     }
-    function willMatchARoute() {
+
+    function willMatchARoute()
+    {
         if (!$this->f3->ROUTES)
             // No routes defined
             return false;
         // Match specific routes first
-        $paths=[];
-        foreach ($keys=array_keys($this->f3->ROUTES) as $key) {
-            $path=preg_replace('/@\w+/','*@',$key);
-            if (substr($path,-1)!='*')
-                $path.='+';
-            $paths[]=$path;
+        $paths = [];
+        foreach ($keys = array_keys($this->f3->ROUTES) as $key) {
+            $path = preg_replace('/@\w+/', '*@', $key);
+            if (substr($path, -1) != '*')
+                $path .= '+';
+            $paths[] = $path;
         }
-        $vals=array_values($this->f3->ROUTES);
-        array_multisort($paths,SORT_DESC,$keys,$vals);
-        $this->f3->ROUTES=array_combine($keys,$vals);
+        $vals = array_values($this->f3->ROUTES);
+        array_multisort($paths, SORT_DESC, $keys, $vals);
+        $this->f3->ROUTES = array_combine($keys, $vals);
         // Convert to BASE-relative URL
-        $req=urldecode($this->f3->PATH);
-        foreach ($this->f3->ROUTES as $pattern=>$routes) {
-            if (!$args=$this->f3->mask($pattern,$req))
+        $req = urldecode($this->f3->PATH);
+        foreach ($this->f3->ROUTES as $pattern => $routes) {
+            if (!$args = $this->f3->mask($pattern, $req))
                 continue;
             return true;
         }
@@ -153,7 +146,7 @@ class WPF3 extends prefab
     function check_routes()
     {
         //$this->f3->run();
-        if($this->willMatchARoute()) {
+        if ($this->willMatchARoute()) {
             $this->f3->run();
             die();
         }
