@@ -21,9 +21,7 @@
     "bcosca/fatfree-core": "3.8.1"
   },
   "suggest": {
-    "ext-json": "*"
-  },
-  "require-dev": {
+    "ext-json": "*",
     "roave/security-advisories": "dev-latest"
   },
   "config": {
