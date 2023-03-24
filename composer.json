@@ -1,7 +1,7 @@
 {
   "name": "joseffb/wpf3",
   "description": "Wordpress implementation of the Fat Free Framework.",
-  "license": "MIT",
+  "license": "GPL-2.0",
   "version": "0.2.0",
   "keywords": [
     "WordPress", "Fat Free Framework"
