@@ -15,17 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'WPF3_NAME',                 'Fat Free Framework for WordPress' );
-define( 'WPF3_REQUIRED_PHP_VERSION', '7.0' );                          //
+define( 'WPF3_REQUIRED_PHP_VERSION', '7.4' );                          //
 define( 'WPF3_REQUIRED_WP_VERSION',  '4.8' );                          //
-define( 'WPF3_REQUIRED_F3_VERSION',  '3.6.4' );                          //
-$f3 = require_once (dirname( __FILE__ ) . '/includes/f3/lib/base.php');
-$f3->set('DEBUG',4);
+define( 'WPF3_REQUIRED_F3_VERSION',  '3.8.1' );                          //
+$f3 = base::instance();
 
 function test () {
     echo "route works";
 }
 
-function wpf3_requirements_met() {
+function wpf3_requirements_met(): bool
+{
     global $wp_version;
     global $f3;
     //require_once( ABSPATH . '/wp-admin/includes/plugin.php' );		// to get is_plugin_active() early
@@ -45,10 +45,9 @@ function wpf3_requirements_met() {
 }
 
 function wpf3_requirements_error() {
-    global $wp_version;
     global $f3;
     $f3_version = explode("-",$f3->VERSION)[0]; //used in the error file.
-    require_once( dirname( __FILE__ ) . '/views/requirements-error.php' );
+    require_once( __DIR__ . '/views/requirements-error.php' );
 }
 
 /*
@@ -56,11 +55,9 @@ function wpf3_requirements_error() {
  * The main program needs to be in a separate file that only gets loaded if the plugin requirements are met. Otherwise older PHP installations could crash when trying to parse it.
  */
 if ( wpf3_requirements_met() ) {
-    require_once( __DIR__ . '/classes/wpf3.php' );
-
     if ( class_exists( 'WPF3' ) ) {
         $GLOBALS['f3']['lib'] = base::instance();
-        $GLOBALS['f3']['plugin'] = new WPF3();
+        $GLOBALS['f3']['plugin'] = new wpf3\main();
         register_activation_hook(   __FILE__, array( $GLOBALS['f3']['plugin'], 'activate' ) );
         register_deactivation_hook( __FILE__, array( $GLOBALS['f3']['plugin'], 'deactivate' ) );
     }

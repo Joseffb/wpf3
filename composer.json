@@ -1,0 +1,35 @@
+{
+  "name": "joseffb/wpf3",
+  "description": "Wordpress implementation of the Fat Free Framework.",
+  "license": "MIT",
+  "version": "0.2.0",
+  "keywords": [
+    "WordPress", "Fat Free Framework"
+  ],
+  "autoload": {
+    "psr-4": {
+      "wpf3\\": "app"
+    }
+  },
+  "authors": [
+    {
+      "name": "Joseff Betancourt",
+      "email": "wpf3@joseffb.com"
+    }
+  ],
+  "require": {
+    "composer/installers": "~1.0",
+    "bcosca/fatfree-core": "3.8.1"
+  },
+  "suggest": {
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "config": {
+    "allow-plugins": {
+      "*": true
+    }
+  }
+}
