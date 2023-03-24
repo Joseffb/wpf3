@@ -18,7 +18,6 @@
     }
   ],
   "require": {
-    "composer/installers": "~1.0",
     "bcosca/fatfree-core": "3.8.1"
   },
   "suggest": {
