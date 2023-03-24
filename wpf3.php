@@ -4,7 +4,7 @@
     Plugin Name: Fat Free Framework for WordPress
     Plugin URI: http://github.com/joseffb/wpf3
     Description: The FatFreeFramework development library dependency for wordpress development. Other plugins may require this plugin.
-    Version: 0.1
+    Version: 0.2
     Author: Joseff Betancourt
     Author URI: http://joseffb.com
     License: GPL2
@@ -14,10 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     die( 'Access denied.' );
 }
 
-define( 'WPF3_NAME',                 'Fat Free Framework for WordPress' );
-define( 'WPF3_REQUIRED_PHP_VERSION', '7.4' );                          //
-define( 'WPF3_REQUIRED_WP_VERSION',  '4.8' );                          //
-define( 'WPF3_REQUIRED_F3_VERSION',  '3.8.1' );                          //
+const WPF3_NAME = 'Fat Free Framework for WordPress';
+const WPF3_REQUIRED_PHP_VERSION = '7.4';                          //
+const WPF3_REQUIRED_WP_VERSION = '4.8';                          //
+const WPF3_REQUIRED_F3_VERSION = '3.8.1';                          //
 $f3 = base::instance();
 
 function test () {
@@ -44,7 +44,8 @@ function wpf3_requirements_met(): bool
     return true;
 }
 
-function wpf3_requirements_error() {
+function wpf3_requirements_error(): void
+{
     global $f3;
     $f3_version = explode("-",$f3->VERSION)[0]; //used in the error file.
     require_once( __DIR__ . '/views/requirements-error.php' );
