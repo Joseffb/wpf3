@@ -20,10 +20,6 @@ const WPF3_REQUIRED_WP_VERSION = '4.8';                          //
 const WPF3_REQUIRED_F3_VERSION = '3.8.1';                          //
 $f3 = base::instance();
 
-function test () {
-    echo "route works";
-}
-
 function wpf3_requirements_met(): bool
 {
     global $wp_version;
